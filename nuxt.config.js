@@ -44,7 +44,13 @@ module.exports = {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    // Doc: https://github.com/nuxt-community/recaptcha-module
+    ['@nuxtjs/recaptcha', {
+      size: 'normal',
+      siteKey: '6LcIWdMUAAAAAEO8tZI7KCdQOKBup1JWIPHCsUgz',
+      version: 2
+    }]
   ],
   /*
   ** Axios module configuration

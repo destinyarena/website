@@ -1,0 +1,40 @@
+.main-flex-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em;
+    margin: 0.5em;
+    border-radius: 10px;
+    align-items: center;
+    .multi {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .single-text {
+        width: 10em;
+        .text {
+        }
+
+        .checkmark {
+        }
+    }
+
+
+    .single-button {
+        font-weight: 700;
+        padding: 0.2em;
+        //background: whitesmoke;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        margin: 0.2em;
+        width: 18em;
+        height: 3em;
+
+        img {
+            max-height: 100%;
+            max-width: 100%;
+        }
+    }
+}
