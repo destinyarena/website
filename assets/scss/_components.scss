@@ -1,10 +1,12 @@
 .main-flex-container {
     display: flex;
     flex-direction: column;
-    padding: 0.5em;
-    margin: 0.5em;
+    padding: 0.2em;
+    margin: 0.2em;
     border-radius: 10px;
     align-items: center;
+    background: hsl(0, 0%, 96%);
+    box-shadow: 3px 4px 3px 0 rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(0, 0, 0, 0.1); 
     .multi {
         display: flex;
         flex-direction: row;
@@ -23,7 +25,9 @@
     .single-button {
         font-weight: 700;
         padding: 0.2em;
-        //background: whitesmoke;
+        background: hsl(0, 0%, 4%);
+        color: hsl(0, 0%, 96%);
+        box-shadow: 3px 4px 3px 0 rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(0, 0, 0, 0.1); 
         display: flex;
         justify-content: center;
         align-items: center;

@@ -1,23 +1,20 @@
 <template>
   <div class="body">
     <div class="registration-title">
-         Destiny Arena Registration
+      <img src="~/assets/images/logo.jpg"></img>
+      <span>REGISTRATION</span>
     </div>
-    <div class="main-flex-container discord-background">
-        <div class="single-container">
-          <div class="single-button blurple-background">
-            DISCORD
-            <!--img src="~/assets/images/discord.svg"></img-->
-          </div>
-          <div class="single-text">
-          </div>
+    <div class="main-flex-container">
+        <div class="single-button">
+          DISCORD
+          <!--img src="~/assets/images/discord.svg"></img-->
         </div>
-        <div class="single-button faceit-background">
+        <div class="single-button">
           FACEIT
           <!--img src="~/assets/images/faceit.png"></img-->
         </div>
-        <div class="single-button bungie-background">
-          BUNGIE.NET
+        <div class="single-button">
+          BUNGIE
           <!--img src="~/assets/images/bungie.png"></img-->
         </div>
     </div>
@@ -27,9 +24,13 @@
           @success="onSuccess"
           @expired="onExpired"
         />
-
-        <div class="register-button">
-          Register
+        <div class="buttons row">
+          <div class="reset-button">
+            Reset
+          </div>
+          <div class="register-button">
+            Register
+          </div>
         </div>
     </div>
   </div>
