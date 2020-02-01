@@ -21,9 +21,9 @@ export default {
     async redirectOAuth () {
       if (this.$nuxt.context.query.code && this.$nuxt.context.query.state && process.client) {
         try {
-          const { data } = await this.$axios.get('/oauth/discord/callback' + '?code=' + this.$nuxt.context.query.code + '&state=' + this.$nuxt.context.query.state)
+          const { data } = await this.$axios.get('/oauth/bungie/callback' + '?code=' + this.$nuxt.context.query.code + '&state=' + this.$nuxt.context.query.state)
           console.log('Token: ', data.token)
-          this.$nuxt.$store.commit('auth/discord', data.token)
+          this.$nuxt.$store.commit('auth/bungie', data.token)
           this.$nuxt.context.redirect(200, '/registration')
         } catch (e) {
           console.error(e)

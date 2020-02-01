@@ -16,13 +16,25 @@
           </div>
         </div>
 
-        <div class="tile-body">
-          <span>Username: Arturo#0001</span>
+        <div class="tile-body" v-if="profiles.discord.show">
+          <div class="tile-body-item">
+            <span class="key">
+              Username:
+            </span>
+            <span class="value">
+              {{ profiles.discord.username }}#{{ profiles.discord.discriminator }}
+            </span>
+          </div>
+        </div>
+        <div class="tile-body" v-else>
+          <div class="tile-body-item">
+            <span>Please link your account</span>
+          </div>
         </div>
 
         <div class="tile-footer">
           <button v-on:click="discordClick" class="button">
-            <span>LOGIN</span>
+            <span>LINK</span>
           </button>
         </div>
       </div>
@@ -41,13 +53,50 @@
           </div>
         </div>
 
-        <div class="tile-body">
-          <span>Username: Arturo#0001</span>
+        <div class="tile-body" v-if="profiles.bungie.show">
+          <div class="tile-body-item">
+            <span class="key">
+              Username:
+            </span>
+            <span class="value">
+              {{ profiles.bungie.username }}
+            </span>
+          </div>
+
+          <div class="tile-body-item" v-if="profiles.bungie.steam">
+            <span class="key">
+              Steam:
+            </span>
+            <span class="value">
+              {{ profiles.bungie.steam }}
+            </span>
+          </div>
+          <div class="tile-body-item" v-if="profiles.bungie.psn">
+            <span class="key">
+              PSN:
+            </span>
+            <span class="value">
+              {{ profiles.bungie.psn }}
+            </span>
+          </div>
+          <div class="tile-body-item" v-if="profiles.bungie.xbox">
+            <span class="key">
+              Xbox:
+            </span>
+            <span class="value">
+              {{ profiles.bungie.xbox }}
+            </span>
+          </div>
+        </div>
+        <div class="tile-body" v-else>
+          <div class="tile-body-item">
+            <span>Please link your account</span>
+          </div>
         </div>
 
         <div class="tile-footer">
-          <button v-on:click="faceitClick" class="button">
-            <span>LOGIN</span>
+          <button v-on:click="bungieClick" class="button">
+            <span>LINK</span>
           </button>
         </div>
       </div>
@@ -66,13 +115,25 @@
           </div>
         </div>
 
-        <div class="tile-body">
-          <span>Username: Arturo#0001</span>
+        <div class="tile-body" v-if="profiles.faceit.show">
+          <div class="tile-body-item">
+            <span class="key">
+              Username:
+            </span>
+            <span class="value">
+              {{ profiles.faceit.username }}
+            </span>
+          </div>
+        </div>
+        <div class="tile-body" v-else>
+          <div class="tile-body-item">
+            <span>Please link your account</span>
+          </div>
         </div>
 
         <div class="tile-footer">
           <button v-on:click="faceitClick" class="button">
-            <span>LOGIN</span>
+            <span>LINK</span>
           </button>
         </div>
       </div>
@@ -81,6 +142,8 @@
 </template>
 
 <script>
+import { loadDiscordProfile, loadBungieProfile, loadFaceitProfile } from '~/utils/jwt.js'
+
 export default {
   data () {
     return {
@@ -122,6 +185,18 @@ export default {
         this.tokens.discord = this.$nuxt.$store.state.auth.discord
         this.tokens.bungie = this.$nuxt.$store.state.auth.bungie
         this.tokens.faceit = this.$nuxt.$store.state.auth.faceit
+
+        if (this.tokens.discord) {
+          this.profiles.discord = loadDiscordProfile(this.tokens.discord)
+        }
+
+        if (this.tokens.bungie) {
+          this.profiles.bungie = loadBungieProfile(this.tokens.bungie)
+        }
+
+        if (this.tokens.faceit) {
+          this.profiles.faceit = loadFaceitProfile(this.tokens.faceit)
+        }
       }
     },
 
