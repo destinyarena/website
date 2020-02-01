@@ -1,60 +1,88 @@
-@import url('https://fonts.googleapis.com/css?family=Bowlby+One+SC&display=swap');
-.registration-title {
-    font-weight: 700;
-    font-size: 2em;
+.section {
     display: flex;
-    font-family: 'Bowlby One SC', cursive;
-    flex-direction: column;
+    height: 100%;
+    width: 95%;
+    margin: auto;
+    justify-content: space-evenly;
+    //justify-content: space-around;
     align-items: center;
 
-    img {
-        height: 5em;
-        width: 5em;
-        border-radius: 100%;
-        border-style: solid;
-        border-color: hsl(0, 0%, 96%);
-        border-width: 0.2em;
-    }
+    font-weight: 500;
 }
 
-.buttons {
+.tile {
+    background-color: #2C2F33;
+
+
+    flex-grow: 1;
+    border-radius: 3px;
+
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    justify-content: space-between;
+
+    height: 90%;
+    max-height: 30em;
     width: 100%;
-    .button {
-        flex-grow: 1;
+    max-width: 18em;
+    border: 2px solid rgba(0,0,0,0.1);
+
+    .tile-header {
+        display: flex;
+        flex-direction: row;
+
+        //border-top: 2px solid rgba(0,0,0,.1);
+        //border-left: 2px solid rgba(0,0,0,.1);
+        //border-right: 2px solid rgba(0,0,0,.1);
+
+        .tile-header-icon {
+            padding: 0.2em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            img {
+                height: 2em;
+                width: 2em;
+            }
+        }
+
+        .tile-header-text {
+            padding: 0.2em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            // Fix for centering things plz dont kill me this is css...
+            margin-left: auto;
+
+            span {
+                margin: auto;
+                padding-right: 0.2em;
+            }
+        }
     }
-}
 
-.registration {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    .tile-body {
+        display: flex;
+        flex-direction: column;
 
+        padding: 1.2em;
+        height: 100%;
 
-    .reset-button {
-        background: #E03C31 !important;
-        margin-right: 15px;
-        width: 50% !important;
+        span {
+            padding: 0.1em;
+        }
     }
 
-    .register-button,
-    .reset-button {
-        margin-top: 0.5em;
+    .tile-footer {
         display: flex;
         justify-content: center;
-        padding: 0.2em;
-        padding-left: 0.5em;
-        padding-right: 0.5em;
-        border-radius: 7px;
-        font-weight: 700;
-        flex-grow: 1;
-        width: 100%;
-        height: 2em;
-        color: whitesmoke;
-        background-color: #46CB18;
+        align-items: center;
 
+        .button {
+            margin: 0.3em;
+            margin-top: 0;
+        }
     }
 }
-

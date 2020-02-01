@@ -1,0 +1,31 @@
+$button-color: #fff;
+$button-background: hsl(141, 53%, 53%);
+
+$button-hover-color: #fff;
+$button-hover-background: hsl(171, 100%, 41%);
+
+button {
+    border: none;
+    font: inherit;
+    padding: 0;
+}
+
+.button {
+    color: $button-color;
+    background-color: $button-background;
+
+    width: 100%;
+    border-radius: 3px;
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+
+    &:hover {
+        color: $button-hover-color;
+        background-color: $button-hover-background;
+    }
+
+    // CSS is just as bad a LoW and should burn in hell #BOMB BungieHQ
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

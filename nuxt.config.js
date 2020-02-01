@@ -42,7 +42,18 @@ module.exports = {
   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios',
+    ['@nuxtjs/axios', {
+      prefix: "/api",
+      port: "443",
+      host: "destinyarena.app",
+      https: true,
+    }],
+
+    ['nuxt-vuex-localstorage', {
+      localStorage: ['auth'],
+      sessionStorage: ['auth'],
+    }],
+
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
     // Doc: https://github.com/nuxt-community/recaptcha-module
