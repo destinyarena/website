@@ -7,6 +7,7 @@
     <div class="main-flex-container">
         <div class="single-button">
           DISCORD
+          {{ tokens.discord }}
           <!--img src="~/assets/images/discord.svg"></img-->
         </div>
         <div class="single-button">
@@ -38,7 +39,43 @@
 
 <script>
 export default {
+  data () {
+    return {
+      tokens: {
+        discord: null,
+        faceit: null,
+        bungie: null
+      },
+      profiles: {
+        discord: {
+          id: '',
+          username: '',
+          discriminator: ''
+        },
+        faceit: {
+          id: '',
+          username: ''
+        },
+        bungie: {
+          id: '',
+          username: '',
+          xbox: '',
+          psn: '',
+          steam: '',
+          blizzard: ''
+        }
+      }
+    }
+  },
+  mounted () {
+    this.populate()
+  },
   methods: {
+    populate () {
+      if (process.client) {
+        this.tokens.discord = this.$nuxt.$store.state.auth.discord
+      }
+    },
     onError (error) {
       console.log(error)
     },
