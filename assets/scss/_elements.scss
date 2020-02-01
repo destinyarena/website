@@ -11,7 +11,8 @@
 }
 
 .tile {
-    background-color: #2C2F33;
+    //background-color: #2C2F33;
+    background: white;
 
 
     flex-grow: 1;
@@ -22,11 +23,12 @@
     justify-content: space-between;
 
     height: 90%;
-    max-height: 30em;
+    max-height: 20em;
     width: 100%;
-    max-width: 18em;
+    max-width: 22em;
     border: 2px solid rgba(0,0,0,0.1);
 
+    margin: 0.2em;
     .tile-header {
         display: flex;
         flex-direction: row;
@@ -65,6 +67,7 @@
 
     .tile-body {
         display: flex;
+        //color: white;
         flex-direction: column;
 
         padding: 1.2em;
