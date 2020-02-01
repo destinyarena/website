@@ -1,5 +1,12 @@
 <template>
   <div class="body">
+    <!--
+      Registration Logo
+    -->
+    <div class="registration-title">
+      <img src="~/assets/images/logo.jpg"></img>
+      <span>Registration</span>
+    </div>
     <div class="section">
 
       <!--
@@ -127,13 +134,33 @@
         </div>
         <div class="tile-body" v-else>
           <div class="tile-body-item">
-            <span>Please link your account</span>
+            <SPAn>Please link your account</span>
           </div>
         </div>
 
         <div class="tile-footer">
           <button v-on:click="faceitClick" class="button">
             <span>LINK</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!--
+      Footer
+    -->
+    <div class="registration-footer">
+      <div class="recaptcha-container">
+      </div>
+      <div class="buttons">
+        <div class="reset">
+          <button v-on:click="loginReset" class="button">
+            RESET
+          </button>
+        </div>
+        <div class="register">
+          <button v-on:click="submitRegistration" class="button">
+            REGISTER
           </button>
         </div>
       </div>
@@ -225,6 +252,39 @@ export default {
         window.location.href = data
       } catch (e) {
         console.error(e)
+      }
+    },
+
+    loginReset (event) {
+      console.log('Reseting Logins...')
+      this.tokens.discord = null
+      this.tokens.faceit = null
+      this.tokens.bungie = null
+
+      this.profiles.bungie.show = false
+      this.profiles.faceit.show = false
+      this.profiles.discord.show = false
+
+      this.$nuxt.$store.commit('auth/discord', null)
+      this.$nuxt.$store.commit('auth/faceit', null)
+      this.$nuxt.$store.commit('auth/bungie', null)
+    },
+
+    async submitRegistration (event) {
+      if (this.tokens.discord && this.tokens.faceit && this.tokens.bungie) {
+        const payload = {
+          discord: this.tokens.discord,
+          bungie: this.tokens.bungie,
+          faceit: this.tokens.faceit,
+          recaptcha: 'LOLitsboken'
+        }
+
+        try {
+          const resp = await this.$nuxt.$axios.post('/registration', payload)
+          console.log(resp)
+        } catch (e) {
+          console.error(e)
+        }
       }
     },
 
