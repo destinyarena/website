@@ -290,8 +290,6 @@ export default {
         try {
           const resp = await this.$nuxt.$axios.post('/registration', payload)
           console.log(resp)
-
-          this.$nuxt.context.redirect('/registration/success', 200)
         } catch (e) {
           console.log(e)
 
