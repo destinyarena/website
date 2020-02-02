@@ -12,7 +12,8 @@
 
 .tile {
     //background-color: #2C2F33;
-    background: white;
+    //background: white;
+    background: #23272A;
 
 
     flex-grow: 1;
@@ -67,7 +68,7 @@
 
     .tile-body {
         display: flex;
-        //color: white;
+        color: white;
         flex-direction: column;
 
         padding: 1.2em;
@@ -86,6 +87,16 @@
         .button {
             margin: 0.3em;
             margin-top: 0;
+            font-weight: 500;
         }
     }
+}
+
+
+.error {
+    display: flex;
+    color: red;
+    align-items: center;
+    font-size: 1.2em;
+    font-weight: 600;
 }
