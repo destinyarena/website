@@ -5,16 +5,17 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    color: white;
 
     img {
-        max-height: 5em;
-        max-width: 5em;
+        max-height: 6em;
+        max-width: 6em;
         border-radius: 100%;
     }
 
     span {
         font-weight: 500;
-        font-size: 1.5em;
+        font-size: 1.8em;
         padding: 0.1em;
         margin-top: 0.2em;
     }
@@ -27,6 +28,18 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
+
+    .error {
+        bottom: 2em;
+        width: 100vh;
+        position: absolute;
+        margin-bottom: 0.4em;
+        span {
+            margin: auto;
+        }
+    }
+
     .buttons {
         width: 100%;
         display: flex;
@@ -36,6 +49,9 @@
         .reset {
             background: hsl(348, 100%, 61%);
             color: hsl(0, 0%, 100%);
+            &:hover {
+                background: #c13451;
+            }
             flex-grow: 1;
             border-radius: 3px;
             .button {
@@ -51,6 +67,9 @@
             background-color: hsl(217, 71%, 53%);
             border-radius: 3px;
             margin-left: 0.3em;
+            &:hover {
+                background: #2b5eaf;
+            }
             .button {
                 background-color: inherit;
                 color: inherit;

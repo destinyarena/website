@@ -5,7 +5,7 @@
     -->
     <div class="registration-title">
       <img src="~/assets/images/logo.jpg"></img>
-      <span>Registration</span>
+      <span>REGISTRATION</span>
     </div>
     <div class="section">
 
@@ -150,6 +150,9 @@
       Footer
     -->
     <div class="registration-footer">
+      <div v-if="error" class="error">
+        <span>{{ error }}</span>
+      </div>
       <div class="recaptcha-container">
       </div>
       <div class="buttons">
@@ -174,6 +177,7 @@ import { loadDiscordProfile, loadBungieProfile, loadFaceitProfile } from '~/util
 export default {
   data () {
     return {
+      error: null,
       tokens: {
         discord: null,
         faceit: null,
@@ -233,7 +237,8 @@ export default {
         console.log(data)
         window.location.href = data
       } catch (e) {
-        console.error(e)
+        console.log(e)
+        this.error = 'Looks like we are having issues please try again later'
       }
     },
     async bungieClick (event) {
@@ -242,7 +247,8 @@ export default {
         console.log(data)
         window.location.href = data
       } catch (e) {
-        console.error(e)
+        console.log(e)
+        this.error = 'Looks like we are having issues please try again later'
       }
     },
     async faceitClick (event) {
@@ -251,7 +257,8 @@ export default {
         console.log(data)
         window.location.href = data
       } catch (e) {
-        console.error(e)
+        console.log(e)
+        this.error = 'Looks like we are having issues please try again later'
       }
     },
 
@@ -268,6 +275,7 @@ export default {
       this.$nuxt.$store.commit('auth/discord', null)
       this.$nuxt.$store.commit('auth/faceit', null)
       this.$nuxt.$store.commit('auth/bungie', null)
+      this.error = null
     },
 
     async submitRegistration (event) {
@@ -282,9 +290,22 @@ export default {
         try {
           const resp = await this.$nuxt.$axios.post('/registration', payload)
           console.log(resp)
+
+          this.$nuxt.context.redirect('/registration/success', 200)
         } catch (e) {
-          console.error(e)
+          console.log(e)
+
+          if (e.response.status === 403) {
+            this.error = 'Looks like you have already registered'
+          } else if (e.response.status === 401) {
+            this.loginReset()
+            this.error = 'You credentials expired, please try again'
+          } else {
+            this.error = 'Looks like we are having trouble please try again later'
+          }
         }
+      } else {
+        this.error = 'You must link all the above to continue'
       }
     },
 
