@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css?family=Great+Vibes&display=swap');
+.mexican-place {
+    font-family: 'Great Vibes', cursive;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(0deg, rgba(255,226,0,1) 0%, rgba(255,102,0,1) 50%, rgba(255,0,0,1) 100%);
+    .mexican-container {
+        display: flex;
+        flex-direction: column;
+
+        align-items: center;
+        justify-content: center;
+        span {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2em;
+            font-weight: 600;
+        }
+        img {
+            border-style: solid;
+            border-width: 0.4em;
+            border-color: orange;
+            border-radius: 100%;
+            height: 10em;
+            width: 10em;
+        }
+    }
+}
+
+.xenith-audio {
+//    display: none;
+}
+
+.rotate {
+  animation: rotation 0.5s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}

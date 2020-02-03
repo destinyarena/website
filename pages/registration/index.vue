@@ -1,173 +1,190 @@
 <template>
   <div class="body">
-    <!--
-      Registration Logo
-    -->
-    <div class="registration-title">
-      <img src="~/assets/images/logo.jpg"></img>
-      <span>REGISTRATION</span>
+    <div v-if="xenith.show" class="mexican-place">
+      <div class="mexican-container">
+        <span>Welcome to Xenith's mexican place</span>
+        <img class="rotate" src="~/assets/images/xenith.png"></img>
+      </div>
+      <audio
+        id="player"
+        src="~/assets/music/xenith.mp3"
+        autoplay
+        loop
+      >
+      </audio>
     </div>
-    <div class="section">
+    <div v-else class="body-wrapper">
+      <!--
+        Registration Logo
+      -->
+      <div class="registration-title">
+        <img v-on:click="xenithCount" src="~/assets/images/logo.jpg"></img>
+        <span>REGISTRATION</span>
+      </div>
+      <div class="section">
+
+        <!--
+          Discord
+        -->
+        <div class="tile">
+          <div class="tile-header discord-branding">
+            <div class="tile-header-icon">
+              <img src="@/assets/images/discord.svg"></img>
+            </div>
+
+            <div class="tile-header-text">
+              <span>DISCORD</span>
+            </div>
+          </div>
+
+          <div class="tile-body" v-if="profiles.discord.show">
+            <div class="tile-body-item">
+              <span class="key">
+                Username:
+              </span>
+              <span class="value">
+                {{ profiles.discord.username }}#{{ profiles.discord.discriminator }}
+              </span>
+            </div>
+          </div>
+          <div class="tile-body" v-else>
+            <div class="tile-body-item">
+              <span>Please link your account</span>
+            </div>
+          </div>
+
+          <div class="tile-footer">
+            <button v-on:click="discordClick" class="button">
+              <span>LINK</span>
+            </button>
+          </div>
+        </div>
+
+        <!--
+          Bungie
+        -->
+        <div class="tile">
+          <div class="tile-header bungie-branding">
+            <div class="tile-header-icon">
+              <img src="@/assets/images/bungie.png"></img>
+            </div>
+
+            <div class="tile-header-text">
+              <span>BUNGIE</span>
+            </div>
+          </div>
+
+          <div class="tile-body" v-if="profiles.bungie.show">
+            <div class="tile-body-item">
+              <span class="key">
+                Username:
+              </span>
+              <span class="value">
+                {{ profiles.bungie.username }}
+              </span>
+            </div>
+
+            <div class="tile-body-item" v-if="profiles.bungie.steam">
+              <span class="key">
+                Steam:
+              </span>
+              <span class="value">
+                {{ profiles.bungie.steam }}
+              </span>
+            </div>
+            <div class="tile-body-item" v-if="profiles.bungie.psn">
+              <span class="key">
+                PSN:
+              </span>
+              <span class="value">
+                {{ profiles.bungie.psn }}
+              </span>
+            </div>
+            <div class="tile-body-item" v-if="profiles.bungie.xbox">
+              <span class="key">
+                Xbox:
+              </span>
+              <span class="value">
+                {{ profiles.bungie.xbox }}
+              </span>
+            </div>
+          </div>
+          <div class="tile-body" v-else>
+            <div class="tile-body-item">
+              <span>Please link your account</span>
+            </div>
+          </div>
+
+          <div class="tile-footer">
+            <button v-on:click="bungieClick" class="button">
+              <span>LINK</span>
+            </button>
+          </div>
+        </div>
+
+        <!--
+          Faceit
+        -->
+        <div class="tile">
+          <div class="tile-header faceit-branding">
+            <div class="tile-header-icon">
+              <img src="@/assets/images/faceit.png"></img>
+            </div>
+
+            <div class="tile-header-text">
+              <span>FACEIT</span>
+            </div>
+          </div>
+
+          <div class="tile-body" v-if="profiles.faceit.show">
+            <div class="tile-body-item">
+              <span class="key">
+                Username:
+              </span>
+              <span class="value">
+                {{ profiles.faceit.username }}
+              </span>
+            </div>
+          </div>
+          <div class="tile-body" v-else>
+            <div class="tile-body-item">
+              <SPAn>Please link your account</span>
+            </div>
+          </div>
+
+          <div class="tile-footer">
+            <button v-on:click="faceitClick" class="button">
+              <span>LINK</span>
+            </button>
+          </div>
+        </div>
+      </div>
 
       <!--
-        Discord
+        Footer
       -->
-      <div class="tile">
-        <div class="tile-header discord-branding">
-          <div class="tile-header-icon">
-            <img src="@/assets/images/discord.svg"></img>
-          </div>
-
-          <div class="tile-header-text">
-            <span>DISCORD</span>
-          </div>
+      <div class="registration-footer">
+        <div v-if="error" class="error">
+          <span>{{ error }}</span>
         </div>
-
-        <div class="tile-body" v-if="profiles.discord.show">
-          <div class="tile-body-item">
-            <span class="key">
-              Username:
-            </span>
-            <span class="value">
-              {{ profiles.discord.username }}#{{ profiles.discord.discriminator }}
-            </span>
-          </div>
+        <div class="recaptcha-container">
         </div>
-        <div class="tile-body" v-else>
-          <div class="tile-body-item">
-            <span>Please link your account</span>
+        <div class="buttons">
+          <div class="reset">
+            <button v-on:click="loginReset" class="button">
+              RESET
+            </button>
           </div>
-        </div>
-
-        <div class="tile-footer">
-          <button v-on:click="discordClick" class="button">
-            <span>LINK</span>
-          </button>
-        </div>
-      </div>
-
-      <!--
-        Bungie
-      -->
-      <div class="tile">
-        <div class="tile-header bungie-branding">
-          <div class="tile-header-icon">
-            <img src="@/assets/images/bungie.png"></img>
+          <div class="register">
+            <button v-on:click="submitRegistration" class="button">
+              REGISTER
+            </button>
           </div>
-
-          <div class="tile-header-text">
-            <span>BUNGIE</span>
-          </div>
-        </div>
-
-        <div class="tile-body" v-if="profiles.bungie.show">
-          <div class="tile-body-item">
-            <span class="key">
-              Username:
-            </span>
-            <span class="value">
-              {{ profiles.bungie.username }}
-            </span>
-          </div>
-
-          <div class="tile-body-item" v-if="profiles.bungie.steam">
-            <span class="key">
-              Steam:
-            </span>
-            <span class="value">
-              {{ profiles.bungie.steam }}
-            </span>
-          </div>
-          <div class="tile-body-item" v-if="profiles.bungie.psn">
-            <span class="key">
-              PSN:
-            </span>
-            <span class="value">
-              {{ profiles.bungie.psn }}
-            </span>
-          </div>
-          <div class="tile-body-item" v-if="profiles.bungie.xbox">
-            <span class="key">
-              Xbox:
-            </span>
-            <span class="value">
-              {{ profiles.bungie.xbox }}
-            </span>
-          </div>
-        </div>
-        <div class="tile-body" v-else>
-          <div class="tile-body-item">
-            <span>Please link your account</span>
-          </div>
-        </div>
-
-        <div class="tile-footer">
-          <button v-on:click="bungieClick" class="button">
-            <span>LINK</span>
-          </button>
-        </div>
-      </div>
-
-      <!--
-        Faceit
-      -->
-      <div class="tile">
-        <div class="tile-header faceit-branding">
-          <div class="tile-header-icon">
-            <img src="@/assets/images/faceit.png"></img>
-          </div>
-
-          <div class="tile-header-text">
-            <span>FACEIT</span>
-          </div>
-        </div>
-
-        <div class="tile-body" v-if="profiles.faceit.show">
-          <div class="tile-body-item">
-            <span class="key">
-              Username:
-            </span>
-            <span class="value">
-              {{ profiles.faceit.username }}
-            </span>
-          </div>
-        </div>
-        <div class="tile-body" v-else>
-          <div class="tile-body-item">
-            <SPAn>Please link your account</span>
-          </div>
-        </div>
-
-        <div class="tile-footer">
-          <button v-on:click="faceitClick" class="button">
-            <span>LINK</span>
-          </button>
         </div>
       </div>
     </div>
+  </div>
 
-    <!--
-      Footer
-    -->
-    <div class="registration-footer">
-      <div v-if="error" class="error">
-        <span>{{ error }}</span>
-      </div>
-      <div class="recaptcha-container">
-      </div>
-      <div class="buttons">
-        <div class="reset">
-          <button v-on:click="loginReset" class="button">
-            RESET
-          </button>
-        </div>
-        <div class="register">
-          <button v-on:click="submitRegistration" class="button">
-            REGISTER
-          </button>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -177,6 +194,10 @@ import { loadDiscordProfile, loadBungieProfile, loadFaceitProfile } from '~/util
 export default {
   data () {
     return {
+      xenith: {
+        show: false,
+        count: 0
+      },
       error: null,
       tokens: {
         discord: null,
@@ -211,6 +232,13 @@ export default {
     this.populate()
   },
   methods: {
+    xenithCount (event) {
+      if (this.xenith.count >= 5) {
+        this.xenith.show = true
+      }
+
+      this.xenith.count++
+    },
     populate () {
       if (process.client) {
         this.tokens.discord = this.$nuxt.$store.state.auth.discord
