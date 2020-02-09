@@ -1,7 +1,17 @@
 <template>
   <div class="main">
-    <div v-if="displayError" class="error-item">
-      {{ Error }}
+    <div v-if="displayError" class="callback-container">
+      <div class="error-text">
+        <span>{{ error }}</span>
+        <div v-if="invite">
+          <iframe src="https://discordapp.com/widget?id=650109209610027034&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0"></iframe>
+        </div>
+      </div>
+      <div class="error-button">
+        <button v-on:click="retry" class="button">
+          RETRY
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -11,7 +21,8 @@ export default {
   data () {
     return {
       displayError: false,
-      Error: ''
+      error: '',
+      invite: false
     }
   },
   mounted () {
@@ -27,10 +38,20 @@ export default {
           this.$nuxt.context.redirect(200, '/registration')
         } catch (e) {
           console.error(e)
+          if (e.response.status === 401) {
+            this.error = 'Looks like you haven\'t joined the discord'
+            this.invite = true
+          } else if (e.response.status === 400) {
+            this.error = 'Looks like your token is invalid please try again'
+          } else {
+            this.error = 'Something went wrong on our end, please try again later'
+          }
           this.displayError = true
-          this.Error = 'Invalid OAuth code please try again'
         }
       }
+    },
+    retry () {
+      this.$nuxt.context.redirect(200, '/registration')
     }
   }
 }
