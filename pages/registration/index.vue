@@ -18,7 +18,7 @@
         Registration Logo
       -->
       <div class="registration-title">
-        <img v-on:click="xenithCount" src="~/assets/images/logo.jpg"></img>
+        <img v-on:click="xenithCount" src="~/assets/images/logo.png"></img>
         <span>REGISTRATION</span>
       </div>
       <div class="section">
