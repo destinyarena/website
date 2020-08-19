@@ -261,7 +261,7 @@ export default {
 
     async discordClick (event) {
       try {
-        const { data } = await this.$nuxt.$axios.get('/oauth/discord/authurl')
+        const { data } = await this.$nuxt.$axios.get('/v2/oauth/discord/url')
         console.log(data)
         window.location.href = data
       } catch (e) {
@@ -271,7 +271,7 @@ export default {
     },
     async bungieClick (event) {
       try {
-        const { data } = await this.$nuxt.$axios.get('/oauth/bungie/authurl')
+        const { data } = await this.$nuxt.$axios.get('/v2/oauth/bungie/url')
         console.log(data)
         window.location.href = data
       } catch (e) {
@@ -281,7 +281,7 @@ export default {
     },
     async faceitClick (event) {
       try {
-        const { data } = await this.$nuxt.$axios.get('/oauth/faceit/authurl')
+        const { data } = await this.$nuxt.$axios.get('/v2/oauth/faceit/url')
         console.log(data)
         window.location.href = data
       } catch (e) {

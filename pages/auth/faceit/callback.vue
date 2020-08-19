@@ -21,7 +21,7 @@ export default {
     async redirectOAuth () {
       if (this.$nuxt.context.query.code && process.client) {
         try {
-          const { data } = await this.$axios.get('/oauth/faceit/callback' + '?code=' + this.$nuxt.context.query.code)
+          const { data } = await this.$axios.get('/v2/oauth/faceit/callback' + '?code=' + this.$nuxt.context.query.code)
           console.log('Token: ', data.token)
           this.$nuxt.$store.commit('auth/faceit', data.token)
           this.$nuxt.context.redirect(200, '/registration')
