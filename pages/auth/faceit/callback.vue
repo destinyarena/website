@@ -28,7 +28,7 @@ export default {
         } catch (e) {
           console.error(e)
           this.displayError = true
-          this.Error = 'Invalid OAuth code please try again'
+          this.Error = 'Looks like something went wrong while connection your faceit account, please try again.'
         }
       }
     }

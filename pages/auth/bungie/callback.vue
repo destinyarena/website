@@ -28,7 +28,11 @@ export default {
         } catch (e) {
           console.error(e)
           this.displayError = true
-          this.Error = 'Invalid OAuth code please try again'
+          if (e.response.status === 401) {
+            this.Error = e.response.data
+          } else {
+            this.Error = 'Looks like something went wrong while connecting your bungie account, please try again.'
+          }
         }
       }
     }

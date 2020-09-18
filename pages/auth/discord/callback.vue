@@ -41,6 +41,8 @@ export default {
           if (e.response.status === 401) {
             this.error = 'Looks like you haven\'t joined the discord'
             this.invite = true
+          } else if (e.response.status === 403) {
+            this.error = e.response.data
           } else if (e.response.status === 400) {
             this.error = 'Looks like your token is invalid please try again'
           } else {

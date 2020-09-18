@@ -3,7 +3,7 @@
     <div v-if="xenith.show" class="mexican-place">
       <div class="mexican-container">
         <span>Welcome to Xenith's mexican place</span>
-        <img class="rotate" src="~/assets/images/xenith.png"></img>
+        <img class="rotate" src="~/assets/images/xenith.png"/>
       </div>
       <audio
         id="player"
@@ -18,7 +18,7 @@
         Registration Logo
       -->
       <div class="registration-title">
-        <img v-on:click="xenithCount" src="~/assets/images/logo.png"></img>
+        <img v-on:click="xenithCount" src="~/assets/images/logo.png"/>
         <span>REGISTRATION</span>
       </div>
       <div class="section">
@@ -29,7 +29,7 @@
         <div class="tile">
           <div class="tile-header discord-branding">
             <div class="tile-header-icon">
-              <img src="@/assets/images/discord.svg"></img>
+              <img src="@/assets/images/discord.svg"/>
             </div>
 
             <div class="tile-header-text">
@@ -66,7 +66,7 @@
         <div class="tile">
           <div class="tile-header bungie-branding">
             <div class="tile-header-icon">
-              <img src="@/assets/images/bungie.png"></img>
+              <img src="@/assets/images/bungie.png"/>
             </div>
 
             <div class="tile-header-text">
@@ -121,14 +121,11 @@
             </button>
           </div>
         </div>
-
-        <!--
-          Faceit
-        -->
+        <!-- Faceit -->
         <div class="tile">
           <div class="tile-header faceit-branding">
             <div class="tile-header-icon">
-              <img src="@/assets/images/faceit.png"></img>
+              <img src="@/assets/images/faceit.png"/>
             </div>
 
             <div class="tile-header-text">
@@ -167,15 +164,18 @@
         <div v-if="error" class="error">
           <span>{{ error }}</span>
         </div>
+        <div v-if="success" class="registration-success">
+          <span>Thanks for registering!</span>
+        </div>
         <div class="recaptcha-container">
         </div>
-        <div class="buttons">
+        <div class="buttons" v-if="showbuttons">
           <div class="reset">
             <button v-on:click="loginReset" class="button">
               RESET
             </button>
           </div>
-          <div class="register">
+          <div class="register" v-if="showbuttons">
             <button v-on:click="submitRegistration" class="button">
               REGISTER
             </button>
@@ -183,8 +183,6 @@
         </div>
       </div>
     </div>
-  </div>
-
   </div>
 </template>
 
@@ -199,6 +197,7 @@ export default {
         count: 0
       },
       error: null,
+      success: false,
       tokens: {
         discord: null,
         faceit: null,
@@ -230,6 +229,11 @@ export default {
   },
   mounted () {
     this.populate()
+  },
+  computed: {
+    showbuttons () {
+      return !this.success
+    }
   },
   methods: {
     xenithCount (event) {
@@ -316,18 +320,20 @@ export default {
         }
 
         try {
-          const resp = await this.$nuxt.$axios.post('/registration', payload)
+          const resp = await this.$nuxt.$axios.post('/v2/registration', payload)
           console.log(resp)
+          this.error = ""
+          this.success = true
         } catch (e) {
           console.log(e)
 
-          if (e.response.status === 403) {
-            this.error = 'Looks like you have already registered'
+          if (e.response.status === 500) {
+            this.error = 'Looks like we are having trouble please try again later'
           } else if (e.response.status === 401) {
             this.loginReset()
             this.error = 'You credentials expired, please try again'
           } else {
-            this.error = 'Looks like we are having trouble please try again later'
+            this.error = e.response.data
           }
         }
       } else {
