@@ -1,7 +1,9 @@
 <template>
   <div class="main">
-    <div v-if="displayError" class="error-item">
-      {{ Error }}
+    <div v-if="displayError" class="callback-container">
+      <div class="error-text">
+        <span>{{ Error }}</span>
+      </div>
     </div>
   </div>
 </template>

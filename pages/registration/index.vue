@@ -322,7 +322,7 @@ export default {
         try {
           const resp = await this.$nuxt.$axios.post('/v2/registration', payload)
           console.log(resp)
-          this.error = ""
+          this.error = ''
           this.success = true
         } catch (e) {
           console.log(e)
