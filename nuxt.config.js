@@ -41,6 +41,7 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/sentry',
     // Doc: https://axios.nuxtjs.org/usage
     ['@nuxtjs/axios', {
       prefix: '/api',
@@ -63,6 +64,10 @@ module.exports = {
       version: 2
     }]
   ],
+  sentry: {
+    dsn: "https://a8173b6bdf9446a29752775735d811f2@o471645.ingest.sentry.io/5503927",
+
+  },
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
