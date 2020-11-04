@@ -270,6 +270,7 @@ export default {
         window.location.href = data
       } catch (e) {
         console.log(e)
+        this.$sentry.captureException(e)
         this.error = 'Looks like we are having issues please try again later'
       }
     },
@@ -279,6 +280,7 @@ export default {
         console.log(data)
         window.location.href = data
       } catch (e) {
+        this.$sentry.captureException(e)
         console.log(e)
         this.error = 'Looks like we are having issues please try again later'
       }

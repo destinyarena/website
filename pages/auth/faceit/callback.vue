@@ -29,6 +29,7 @@ export default {
           this.$nuxt.context.redirect(200, '/registration')
         } catch (e) {
           console.error(e)
+          this.$sentry.captureException(e)
           this.displayError = true
           this.Error = 'Looks like something went wrong while connection your faceit account, please try again.'
         }

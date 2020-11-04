@@ -29,6 +29,7 @@ export default {
           this.$nuxt.context.redirect(200, '/registration')
         } catch (e) {
           console.error(e)
+          this.$sentry.captureException(e)
           this.displayError = true
           if (e.response.status === 401) {
             this.Error = e.response.data

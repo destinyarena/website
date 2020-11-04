@@ -46,6 +46,7 @@ export default {
           } else if (e.response.status === 400) {
             this.error = 'Looks like your token is invalid please try again'
           } else {
+            this.$sentry.captureException(e)
             this.error = 'Something went wrong on our end, please try again later'
           }
           this.displayError = true
